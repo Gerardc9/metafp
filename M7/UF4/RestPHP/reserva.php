@@ -49,6 +49,7 @@ $restaurantName = isset($_GET['restaurante']) ? $_GET['restaurante'] : ($oldData
                id="namesurname" 
                name="namesurname"
                value="<?php echo htmlspecialchars($oldData['name'] ?? ''); ?>" 
+               
                minlength="3" 
                maxlength="50"
                title="Por favor, ingrese un nombre y apellido válidos, separados por un espacio"

@@ -12,11 +12,11 @@ if (empty($restaurantName)) {
 }
 
 if (empty($reservationDate) || strtotime($reservationDate) < strtotime(date('Y-m-d'))) {
-    $errors[] = "La fecha de la reserva es inválida o no es futura.";
+    $errors[] = "La fecha de la reserva es inválida.";
 }
 
 if (empty($people) || !preg_match('/^[1-9][0-9]*$/', $people)) {
-    $errors[] = "El número de personas debe ser un entero mayor a 0.";
+    $errors[] = "El número de personas debe ser mayor a 0.";
 }
 
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
