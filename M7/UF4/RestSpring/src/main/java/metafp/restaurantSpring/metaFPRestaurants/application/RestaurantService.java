@@ -29,7 +29,7 @@ public class RestaurantService {
 
   public Restaurant getRestaurant(String restaurantId){
     UUID uuidRestaurant = UUID.fromString(restaurantId);
-    Optional<Restaurant> restaurantOptional = restaurantRepository.findByRestaurantId(uuidRestaurant);
+    Optional<Restaurant> restaurantOptional = restaurantRepository.findById(uuidRestaurant);
     if(!restaurantOptional.isPresent()){
       throw new RestaurantNotFoundException("No se ha encontrado ningún restaurante con la ID: " + restaurantId);
     }
@@ -40,11 +40,16 @@ public class RestaurantService {
     return restaurantRepository.findAll();
   }
 
-  public Restaurant updateRestaurant(String id, Integer newCapacity, String newFoodType) {
+  public Restaurant updateRestaurant(String id, Integer newCapacity, String newFoodType, Integer newCurrentGuests) {
     Restaurant restaurant = getRestaurant(id);
     restaurant.updateDetails(newCapacity, newFoodType);
-    return restaurantRepository.save(restaurant);
-}
+
+    if (newCurrentGuests != null) {
+      restaurant.setCurrentGuests(newCurrentGuests);
+    }
+  
+    return restaurantRepository.save(restaurant); 
+  }
 
   public void deleteRestaurant(String id){
     Restaurant restaurant = getRestaurant(id);

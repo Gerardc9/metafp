@@ -1,4 +1,4 @@
-package metafp.restaurantSpring.metaFPRestaurants.infrastructure.rest.domain;
+package metafp.restaurantSpring.metaFPRestaurants.infrastructure.rest.domain.restaurant;
 
 public class CreateRestaurantResponse {
   public String name; 

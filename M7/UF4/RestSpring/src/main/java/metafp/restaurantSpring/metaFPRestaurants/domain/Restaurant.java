@@ -9,21 +9,23 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="restaurants", schema ="restapp")
-
 public class Restaurant {
 
   @Id
   @Column(name="restaurant_id")
   private UUID restaurantId;
 
-  @Column(name="name")
+  @Column(name="name", nullable = false)
   private String name;
 
-  @Column(name="capacity")
+  @Column(name="capacity", nullable = false)
   private Integer capacity;
 
-  @Column(name="food_type")
+  @Column(name="food_type", nullable = false)
   private String foodType;
+
+  @Column(name="current_guests")
+  private Integer currentGuests;
 
 
   public Restaurant(UUID restaurantId, String name, Integer capacity, String foodType){
@@ -31,6 +33,7 @@ public class Restaurant {
     this.name = name;
     this.capacity = capacity;
     this.foodType = foodType;
+    this.currentGuests = 0;
   }
   
   public Restaurant(String name, Integer capacity, String foodType){
@@ -38,9 +41,12 @@ public class Restaurant {
     this.name = name;
     this.capacity = capacity;
     this.foodType = foodType;
+    this.currentGuests = 0;
   }
 
-  public Restaurant(){}
+  public Restaurant(){
+    this.currentGuests = 0;
+  }
 
   public void updateDetails(Integer newCapacity, String newFoodType) {
 
@@ -52,6 +58,7 @@ public class Restaurant {
     }
   }
 
+  //Getters 
   public UUID getRestaurantId() {
     return restaurantId;
   }
@@ -65,5 +72,14 @@ public class Restaurant {
   }
   public String getFoodType() {
     return foodType;
+  }
+
+  public Integer getCurrentGuests() {
+    return currentGuests;
+  }
+
+  //Setters
+  public void setCurrentGuests(Integer currentGuests) {
+    this.currentGuests = currentGuests;
   }
 }

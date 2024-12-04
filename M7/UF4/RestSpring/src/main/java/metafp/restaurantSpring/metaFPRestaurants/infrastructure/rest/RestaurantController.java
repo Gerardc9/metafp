@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import metafp.restaurantSpring.metaFPRestaurants.application.RestaurantService;
 import metafp.restaurantSpring.metaFPRestaurants.domain.Restaurant;
 import metafp.restaurantSpring.metaFPRestaurants.exceptions.NoFieldsProvidedException;
-import metafp.restaurantSpring.metaFPRestaurants.infrastructure.rest.domain.CreateRestaurantRequest;
-import metafp.restaurantSpring.metaFPRestaurants.infrastructure.rest.domain.CreateRestaurantResponse;
+import metafp.restaurantSpring.metaFPRestaurants.infrastructure.rest.domain.restaurant.CreateRestaurantRequest;
+import metafp.restaurantSpring.metaFPRestaurants.infrastructure.rest.domain.restaurant.CreateRestaurantResponse;
 
 
 
@@ -61,11 +61,12 @@ public class RestaurantController {
   public Restaurant updateRestaurant(
     @PathVariable String restaurantId,
     @RequestParam(required = false) Integer newCapacity,
-    @RequestParam(required = false) String newFoodType) {
-      if (newCapacity == null && newFoodType == null) {
+    @RequestParam(required = false) String newFoodType,
+    @RequestParam(required = false) Integer newCurrentGuests) {
+      if (newCapacity == null && newFoodType == null && newCurrentGuests == null) {
         throw new NoFieldsProvidedException("Debe proporcionar al menos un campo para actualizar.");
       }
-      return restaurantService.updateRestaurant(restaurantId, newCapacity, newFoodType);
+      return restaurantService.updateRestaurant(restaurantId, newCapacity, newFoodType, newCurrentGuests);
     }
 
 }
